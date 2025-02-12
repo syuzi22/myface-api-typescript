@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes,Route, Link } from 'react-router-dom';
-import './App.css'
+import './App.scss'
 import { PostList } from './pages/postlist/postlist.tsx';
 import { UserDetails } from './pages/userdetails/userdetails.tsx';
 import { UserList } from './pages/userlist/userlist.tsx';
