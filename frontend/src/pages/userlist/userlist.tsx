@@ -11,8 +11,6 @@ export const UserList = ({setSelectedUserId}: UserListProps) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    console.log(userlist);
-
     useEffect(() => {
     fetch(`http://localhost:3001/users/`)
         .then(response => response.json())
