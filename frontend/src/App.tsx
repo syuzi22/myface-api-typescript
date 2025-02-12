@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
 import './App.css'
 import { PostModel } from '../../src/models/api/postModel.ts';
-import { Post } from './components/post/post.tsx';
+import { PostList } from './pages/postlist/postlist.tsx';
+import { UserDetails } from './pages/userdetails/userdetails.tsx';
+import { UserList } from './pages/userlist/userlist.tsx';
 
 function App() {
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  //
+  const [selectedUserId, setSelectedUserId] = useState<number|null>(null);
 
   useEffect(() => {
     fetch("http://localhost:3001/posts")
@@ -30,22 +35,15 @@ function App() {
   }
 
   return (
-    <div>
+    <Router>
       <div>
-        <ul>
-          {posts.map(({imageUrl, postedBy, createdAt, message}: PostModel, index: number) => {
-            return (<li key={`post-${index}`}>
-              <Post 
-                imageUrl={imageUrl}
-                postedBy={postedBy.username}
-                createdAt={createdAt}
-                message={message}
-              />
-            </li>)
-          })}
-        </ul>
+      <Routes>
+        <Route path="/" element={<PostList posts={posts} />} />
+        <Route path="/userdetails" element={<UserDetails id={selectedUserId} />} />
+        <Route path="/userlist" element={<UserList setSelectedUserId={setSelectedUserId} />} />
+      </Routes>
       </div>
-    </div>
+    </Router>
   )
 }
 
