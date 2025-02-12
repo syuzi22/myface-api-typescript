@@ -12,11 +12,11 @@ export const PostList = () => {
         .then(response => response.json())
         .then(data => setPosts(data.results))
         .catch(error => {
-        setError(true);
-        console.log(error);
+            setError(true);
+            console.log(error);
         })
         .finally(() => {
-        setIsLoading(false);
+            setIsLoading(false);
         })
     }, [])
 

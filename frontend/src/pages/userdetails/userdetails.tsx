@@ -16,21 +16,21 @@ export const UserDetails = ({id}: UserDetailsProp) => {
             .then(response => response.json())
             .then(data => setUserdata(data))
             .catch(error => {
-            setError(true);
-            console.log(error);
+                setError(true);
+                console.log(error);
             })
             .finally(() => {
-            setIsLoading(false);
+                setIsLoading(false);
             })
         }
     }, [])
 
     if (error) {
-    return (<div>Service is temporarily unavailable. Please, try later. </div>)
+        return (<div>Service is temporarily unavailable. Please, try later. </div>)
     }
 
     if (isLoading) {
-    return (<div>User details are loading...</div>)
+        return (<div>User details are loading...</div>)
     }
     
     return (<> {userdata && 

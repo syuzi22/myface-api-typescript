@@ -16,11 +16,11 @@ export const UserList = ({setSelectedUserId}: UserListProps) => {
         .then(response => response.json())
         .then(data => setUserlist(data.results))
         .catch(error => {
-        setError(true);
-        console.log(error);
+            setError(true);
+            console.log(error);
         })
         .finally(() => {
-        setIsLoading(false);
+            setIsLoading(false);
         })
     }, [])
 
