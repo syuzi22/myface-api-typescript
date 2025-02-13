@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { UserModel } from '../../../../src/models/api/userModel.ts'
 import { useParams } from 'react-router-dom';
 import './userdetails.scss'
+import { Post } from '../../components/post/post.tsx';
 
 export const UserDetails = () => {
     const [userdata, setUserdata] = useState<UserModel|null>(null);
@@ -44,6 +45,19 @@ export const UserDetails = () => {
                         <div className="user-details--email">{userdata.email}</div>
                     </div>
                 </div>
+            </div>
+            <div className="user-details-post-list-container">
+                <ul className="user-details-post-list">
+                    {userdata.posts.map(({imageUrl, createdAt, message}, index) =>
+                        <li key={`user-details-post-${index}`}>
+                            <Post
+                                imageUrl={imageUrl}
+                                postedBy={userdata.username}
+                                createdAt={createdAt}
+                                message={message}
+                            />
+                        </li>)}
+                </ul>
             </div>
         </div>
         : <div className="user-details">Information about this user is unavailable</div>

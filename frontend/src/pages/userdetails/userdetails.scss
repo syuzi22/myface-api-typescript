@@ -1,4 +1,5 @@
 @import '../../consts';
+@import '../../mixins';
 
 .user-details {
     &--coverimage {
@@ -46,5 +47,15 @@
 
     &--email {
         font-size: 10px;
+    }
+}
+
+.user-details-post-list {
+    @include reset-list;
+    @include post-list-grid-layout;
+    padding-bottom: $base-gap;
+
+    &-container {
+        padding: 0 $base-gap;
     }
 }
