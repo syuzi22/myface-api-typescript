@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import { UserModel } from '../../../../src/models/api/userModel.ts'
+import { useParams } from 'react-router-dom';
 
-interface UserDetailsProp {
-    id: number|null
-}
-
-export const UserDetails = ({id}: UserDetailsProp) => {
+export const UserDetails = () => {
     const [userdata, setUserdata] = useState<UserModel|null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
+
+    const { id } = useParams()
 
     useEffect(() => {
         if (id) {
@@ -23,7 +22,7 @@ export const UserDetails = ({id}: UserDetailsProp) => {
                 setIsLoading(false);
             })
         }
-    }, [])
+    }, [id])
 
     if (error) {
         return (<div>Service is temporarily unavailable. Please, try later. </div>)
@@ -33,13 +32,14 @@ export const UserDetails = ({id}: UserDetailsProp) => {
         return (<div>User details are loading...</div>)
     }
     
-    return (<> {userdata && 
-        <div>
+    return (<> {userdata
+        ?<div>
             <div><img src={userdata.coverImageUrl}/></div>
             <div><img src={userdata.profileImageUrl}/></div>
             <div>{userdata.name}</div>
             <div>{userdata.username}</div>
             <div>{userdata.email}</div>
         </div>
+        : <div>Information about this user is unavailable</div>
     }</>)
 }

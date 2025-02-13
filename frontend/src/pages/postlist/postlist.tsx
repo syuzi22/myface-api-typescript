@@ -31,16 +31,15 @@ export const PostList = () => {
     return (
         <div>
             <ul>
-            {posts.map(({imageUrl, postedBy, createdAt, message}: PostModel, index: number) => {
-                return (<li key={`post-${index}`}>
-                <Post 
-                    imageUrl={imageUrl}
-                    postedBy={postedBy.username}
-                    createdAt={createdAt}
-                    message={message}
-                />
-                </li>)
-            })}
+            {posts.map(({imageUrl, postedBy, createdAt, message}: PostModel, index: number) => 
+                <li key={`post-${index}`}>
+                    <Post 
+                        imageUrl={imageUrl}
+                        postedBy={postedBy.username}
+                        createdAt={createdAt}
+                        message={message}
+                    />
+                </li>)}
             </ul>
         </div>
     )
