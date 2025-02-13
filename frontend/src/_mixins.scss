@@ -17,29 +17,3 @@
       grid-template-columns: 1fr;
     }
 }
-
-@mixin post-list-flex-layout($gap: 16px) {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap;
-    justify-content: center;
-
-    li {
-        flex: 1 1 calc(33% - $gap);
-        max-width: calc(33% - $gap);
-    }
-
-    @media (max-width: 899px) {
-        li {
-            flex: 1 1 calc(50% - $gap);
-            max-width: calc(50% - $gap);
-        }
-    }
-
-    @media (max-width: 599px) {
-        li {
-            flex: 1 1 100%;
-            max-width: 100%;
-        }
-    }
-}
