@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { UserModel } from "../../../../src/models/api/userModel";
 import { Link } from "react-router-dom";
+import './userlist.scss'
 
 export const UserList = () => {
     const [userlist, setUserlist] = useState<UserModel[]>([]);
@@ -29,7 +30,7 @@ export const UserList = () => {
     }
 
     return (
-        <ul>
+        <ul className="user-list">
             {userlist.map(({name, id}: UserModel, index: number) => 
                 <li key={`userlist-${index}`}>
                     <Link to={`/userdetails/${id}`}>

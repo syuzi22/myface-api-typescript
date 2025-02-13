@@ -1,11 +1,30 @@
+@import 'consts';
+@import 'mixins';
+
+body {
+  height: 100%;
+  background-color: $background-color;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  font-family: $font-stack;
+  color: $foreground-color;
 }
 
 .navigator {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  list-style-type: none;
+  @include reset-list;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $base-gap * 2;
+  padding: $base-gap / 1.5;
+  margin-bottom: $base-gap;
+  background-color: $darker-background-color;
+
+  a {
+    color: $foreground-color;
+  }
 }

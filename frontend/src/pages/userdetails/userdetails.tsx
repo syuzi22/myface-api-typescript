@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { UserModel } from '../../../../src/models/api/userModel.ts'
 import { useParams } from 'react-router-dom';
+import './userdetails.scss'
 
 export const UserDetails = () => {
     const [userdata, setUserdata] = useState<UserModel|null>(null);
@@ -33,13 +34,18 @@ export const UserDetails = () => {
     }
     
     return (<> {userdata
-        ?<div>
-            <div><img src={userdata.coverImageUrl}/></div>
-            <div><img src={userdata.profileImageUrl}/></div>
-            <div>{userdata.name}</div>
-            <div>{userdata.username}</div>
-            <div>{userdata.email}</div>
+        ?<div className="user-details">
+            <div style={{backgroundImage: `url(${userdata.coverImageUrl})`}} className="user-details--coverimage">
+                <div className="user-details--profile">
+                    <img src={userdata.profileImageUrl} className="user-details--avatar" />
+                    <div className="user-details--name-container">
+                        <div className="user-details--name">{userdata.name}</div>
+                        <div className="user-details--username">{userdata.username}</div>
+                        <div className="user-details--email">{userdata.email}</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        : <div>Information about this user is unavailable</div>
+        : <div className="user-details">Information about this user is unavailable</div>
     }</>)
 }
