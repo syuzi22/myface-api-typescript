@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PostModel } from '../../../../src/models/api/postModel.ts';
 import { Post } from './../../components/post/post.tsx';
-import './postlist.scss'
+import './postlist.scss';
 
 export const PostList = () => {
     const [posts, setPosts] = useState<PostModel[]>([]);
@@ -31,6 +31,7 @@ export const PostList = () => {
 
     return (
         <div className="post-list-container">
+            <div>Hello</div>
             <ul className="post-list">
             {posts.map(({imageUrl, postedBy, createdAt, message}: PostModel, index: number) => 
                 <li key={`post-${index}`}>
