@@ -8,6 +8,7 @@ export default {
     "moduleFileExtensions": ["ts", "tsx", "js", "json"],
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
-      "@testing-library/jest-dom"
+      "@testing-library/jest-dom",
+      "<rootDir>/jest.setup.ts"
     ]
   };

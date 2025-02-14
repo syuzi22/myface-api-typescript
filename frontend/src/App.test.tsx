@@ -1,46 +1,39 @@
 import '@testing-library/jest-dom';
-import { TextEncoder } from 'util';
-global.TextEncoder = TextEncoder;
 import { act, render, screen } from '@testing-library/react';
-import { PostList } from './pages/postlist/postlist';
 import { UserList } from './pages/userlist/userlist';
-import { mockPostsResponse, mockUsersResponse } from './mockresponses';
 import { MemoryRouter } from 'react-router-dom';
-
-describe('PostList', () => {
-    beforeEach(() => {
-        global.fetch = jest.fn().mockResolvedValue({
-            json: jest.fn().mockResolvedValue(mockPostsResponse),
-            status: 200,
-            ok: true
-        })
-    })
-
-    test('posts', async() => {
-        render(<PostList />);
-        const textElement = await screen.findByText(/Hello/i);
-        expect(textElement).toBeInTheDocument();
-    });
-})
-
-//////////////
-
-// describe('User details', () => {
-//     beforeEach(() => {
-//         global.fetch = jest.fn().mockResolvedValue({
-//             json: jest.fn().mockResolvedValue(mockUserDetailsResponse),
-//             status: 200,
-//             ok: true
-//         })
-//     })
-// })
-
-///////////
 
 describe('UserList', () => {
     beforeEach(() => {
         global.fetch = jest.fn().mockResolvedValue({
-            json: jest.fn().mockResolvedValue(mockUsersResponse),
+            json: jest.fn().mockResolvedValue(
+                {
+                    next: null,
+                    previous: null,
+                    results: [{
+                        id: 58,
+                        name: "Anatollo Assinder",
+                        username: "aassinder11",
+                        email: "aasinder11@blinklist.com",
+                        coverImageUrl: "https://picsum.photos/id/302/2100/800",
+                        profileImageUrl: "https://robohash.org/aassinder1l.png?bgset=bg1",
+                        likes: [],
+                        dislikes: [],
+                        posts: []
+                    }, {
+                        id: 21,
+                        name: "Audrie Laslett",
+                        username: "alaslettk",
+                        email: "alaslettk@cpanel.net",
+                        coverImageUrl: "https://picsum.photos/id/222/2100/800",
+                        profileImageUrl: "https://robohash.org/alaslettk.png?bgset=bg1",
+                        likes: [],
+                        dislikes: [],
+                        posts: []
+                    }],
+                    total: 2
+                }
+            ),
             status: 200,
             ok: true
         })
@@ -48,9 +41,8 @@ describe('UserList', () => {
 
     test('should render', async() => {
         await act( async () => render(<MemoryRouter><UserList/></MemoryRouter>));
-        // expect(await screen.findByText("Anatollo")).toBeVisible();
+        const linkElement = screen.getByText(/Anatollo Assinder/i);
+        expect(linkElement).toBeInTheDocument();
+        expect(linkElement).toHaveAttribute('href', '/userdetails/58'); 
     });
 })
-
-
-
