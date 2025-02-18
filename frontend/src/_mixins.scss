@@ -1,0 +1,19 @@
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin post-list-grid-layout($gap: 16px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $gap;
+  
+    @media (max-width: 899px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    @media (max-width: 599px) {
+      grid-template-columns: 1fr;
+    }
+}

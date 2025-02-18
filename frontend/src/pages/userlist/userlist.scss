@@ -1,0 +1,13 @@
+@import '../../consts';
+@import '../../mixins';
+
+.user-list {
+    @include reset-list;
+    display: flex;
+    flex-direction: column;
+    gap: $base-gap / 2;
+
+    a {
+        color: $foreground-color;
+    }
+}

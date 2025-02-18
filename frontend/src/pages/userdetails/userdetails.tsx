@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { UserModel } from '../../../../src/models/api/userModel.ts'
+import { useParams } from 'react-router-dom';
+import './userdetails.scss'
+import { Post } from '../../components/post/post.tsx';
 
-interface UserDetailsProp {
-    id: number|null
-}
-
-export const UserDetails = ({id}: UserDetailsProp) => {
+export const UserDetails = () => {
     const [userdata, setUserdata] = useState<UserModel|null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
+
+    const { id } = useParams()
 
     useEffect(() => {
         if (id) {
@@ -23,7 +24,7 @@ export const UserDetails = ({id}: UserDetailsProp) => {
                 setIsLoading(false);
             })
         }
-    }, [])
+    }, [id])
 
     if (error) {
         return (<div>Service is temporarily unavailable. Please, try later. </div>)
@@ -33,13 +34,32 @@ export const UserDetails = ({id}: UserDetailsProp) => {
         return (<div>User details are loading...</div>)
     }
     
-    return (<> {userdata && 
-        <div>
-            <div><img src={userdata.coverImageUrl}/></div>
-            <div><img src={userdata.profileImageUrl}/></div>
-            <div>{userdata.name}</div>
-            <div>{userdata.username}</div>
-            <div>{userdata.email}</div>
+    return (<> {userdata
+        ?<div className="user-details">
+            <div style={{backgroundImage: `url(${userdata.coverImageUrl})`}} className="user-details--coverimage">
+                <div className="user-details--profile">
+                    <img src={userdata.profileImageUrl} className="user-details--avatar" />
+                    <div className="user-details--name-container">
+                        <div className="user-details--name">{userdata.name}</div>
+                        <div className="user-details--username">{userdata.username}</div>
+                        <div className="user-details--email">{userdata.email}</div>
+                    </div>
+                </div>
+            </div>
+            <div className="user-details-post-list-container">
+                <ul className="user-details-post-list">
+                    {userdata.posts.map(({imageUrl, createdAt, message}, index) =>
+                        <li key={`user-details-post-${index}`}>
+                            <Post
+                                imageUrl={imageUrl}
+                                postedBy={userdata.username}
+                                createdAt={createdAt}
+                                message={message}
+                            />
+                        </li>)}
+                </ul>
+            </div>
         </div>
+        : <div className="user-details">Information about this user is unavailable</div>
     }</>)
 }
